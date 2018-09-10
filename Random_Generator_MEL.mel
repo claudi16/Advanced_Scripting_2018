@@ -1,0 +1,32 @@
+global proc string[] petal(int $randomNum) {
+
+string $blossom[];
+    
+
+for($i=0; $i<$randomNum; $i++){
+    string $temporary[] = duplicate -rr;
+    $blossom[$i] = $temporary[0];
+   
+    }
+    
+    return $blossom;
+}
+
+global proc movingPetals(int $trandMin, int $trandMax, int $rotMin, int $rotMax, int$trandMinY){
+    string $moving[] = petal(20); //Input number of dupes here!
+    
+    for($item in $moving){
+        
+        int $randX = rand($trandMin, $trandMax);
+        int $randY = rand($trandMinY, $trandMax);
+        int $randZ = rand($trandMin, $trandMax);
+        int $randRotateX = rand($rotMin, $rotMax);
+        int $randRotateY = rand($rotMin, $rotMax);
+        int $randRotateZ = rand($rotMin, $rotMax);
+        
+        move $randX $randY $randZ $item;
+        rotate $randRotateX $randY $randRotateZ $item;
+    }
+}
+
+movingPetals(-10, 10, -40, 60, 0); //Input transform min/max, rotate min/max
