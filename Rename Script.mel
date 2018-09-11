@@ -1,0 +1,21 @@
+global proc renameSelected(string $naming, string $nodeType){
+    
+   string $selectedObj[] = `ls -selection`; //selected Objects
+   string $printOut = ("name_#_nodeType"); //naming template
+   
+   string $new[]; //new array to hold tokenized 
+   tokenize $printOut "_" $new; //tokenizing naming template
+   int $number = 1; //counter
+   
+   for ($item in $selectedObj){
+
+       $new[0] = $naming;
+       $new[1] = $number++;//counting
+       $new[2] = $nodeType;
+   
+       string $rearrange = $new[0] + "_" + $new[1] + "_" + $new[2]; //rearranging
+       rename $item $rearrange;
+   }
+   
+} 
+renameSelected("Leg", "Jnt");
