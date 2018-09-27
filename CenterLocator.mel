@@ -1,0 +1,25 @@
+global proc string CenterLocator(){
+    string $sels[] = `ls -sl`; //assign to array
+    string $temp[] = `duplicate -rr $sels`; //duplicate selection
+
+    if(size($temp) > 1){
+        $temp = `polyUnite $temp`; //if more than one obj is selected combine to query
+    }
+
+    float $bbPos[];
+    $bbPos = `xform -q -boundingBox $temp`; //query bounding box min & max values & assign to float array
+    delete -constructionHistory $temp[0];
+    delete $temp[0];//delete temporary obj
+
+    float $xPos, $yPos, $zPos;
+    $xPos = ($bbPos[0] + $bbPos[3]) / 2;
+    $yPos = ($bbPos[1] + $bbPos[4]) / 2;
+    $zPos = ($bbPos[2] + $bbPos[5]) / 2;
+
+    string $loc[] = `spaceLocator -name "TempLocator" -position 0 0 0`;
+    xform -translation $xPos $yPos $zPos -worldSpace -absolute $loc[0];
+
+    return $loc[0];
+}
+
+CenterLocator();
