@@ -1,15 +1,3 @@
-global proc CreateCtrls(int $color)
-{
-    string $sels[] = `ls -sl`;
-    
-    for ($sel in $sels){
-        string $ctrls[] = `circle -name ($sel + "_Ctrl")`;
-        string $ctrl = $ctrls[0];
-        ColorControls($ctrl, $color);
-    }
-}
-
-
 global proc ColorControls(string $ctrl, int $color)
 {
     // Sets color index of the control
