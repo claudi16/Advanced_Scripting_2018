@@ -4,16 +4,22 @@ global proc CreateCtrls(int $color){
     
     string $sels[] = `ls -sl`;
     
-    for ($sel in $sels){
-        group -em -name ($sel + "_Ctrl_Grp");
-        string $ctrls[] = `circle -name ($sel + "_Ctrl")`;
-        string $ctrl = $ctrls[0];
-        parent $ctrl ($sel + "_Ctrl_Grp");
-        ColorControls($ctrl, $color); //assign color index
-        pointConstraint $sel ($sel + "_Ctrl_Grp"); //move controls to selected objects
+    if(size ($sels) > 0){
+        for ($sel in $sels){
+            group -em -name ($sel + "_Ctrl_Grp");
+            string $ctrls[] = `circle -name ($sel + "_Ctrl")`;
+            string $ctrl = $ctrls[0];    
+            parent $ctrl ($sel + "_Ctrl_Grp");
+            ColorControls($ctrl, $color); //assign color index
+            matchTransform ($sel + "_Ctrl_Grp") $sel ; //move controls to selected objects
         
-    }
+        }
+      }else{
+          
+          circle -name ("Ctrl");
+          group -name ("Ctrl_Grp");
+          select -cl;
+      }
     
 }
 
-CreateCtrls(13); //Choose color

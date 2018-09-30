@@ -1,0 +1,37 @@
+source "ChangeCtrlColor";
+
+global proc CreateCtrlsFlower(int $color){
+    
+    string $sels[] = `ls -sl`;
+    
+    if(size ($sels) > 0){
+        for ($sel in $sels){
+            string $ctrls[] = `circle -name ($sel + "_Ctrl")`;
+            select -tgl $sel.cv[0] ;
+            select -tgl $sel.cv[2] ;
+            select -tgl $sel.cv[6] ;
+            select -tgl $sel.cv[4] ;
+            scale -r -p 0cm 0cm 0cm -0.312928 -0.312928 -0.312928 ;
+            group -em -name ($sel + "_Ctrl_Grp");
+            string $ctrl = $ctrls[0];  
+            parent $ctrl ($sel + "_Ctrl_Grp");
+            scale -r 4 4 4;
+            ColorControls($ctrl, $color); //assign color index
+            matchTransform ($sel + "_Ctrl_Grp") $sel;  //move controls to selected objects
+        
+        }
+      }else{
+          string $flowers[] = `circle -name ("Ctrl")`;
+           for ($nurbs in $flowers){ 
+                select -add $nurbs.ep[0] ;
+                select -add $nurbs.ep[2] ;
+                select -add $nurbs.ep[6] ;
+                select -add $nurbs.ep[4] ;
+            scale -r -p 0cm 0cm 0cm -0.00268346 -0.00268346 -0.00268346 ;
+            }
+          group -name ("Ctrl_Grp");
+          scale -r 220000 220000 220000;
+          select -cl;
+      }
+    
+}
