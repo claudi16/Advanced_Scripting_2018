@@ -1,0 +1,108 @@
+global proc RandomGeneratorUI()
+{
+    
+    string $mainWindow = "RandomPlacementWindow";
+       
+    if (`window -exists $mainWindow`){
+        deleteUI $mainWindow;
+    }
+    
+    $mainWindow = `window -title "Claudi's Toolbox" $mainWindow`;
+
+    
+    
+string $tabs = `tabLayout -innerMarginWidth 5 -innerMarginHeight 5`;//setting tab size
+string $child1 = `rowColumnLayout -numberOfColumns 2`;//placing script in column
+setParent ..;
+     
+string $child2 = `rowColumnLayout -numberOfColumns 2`;
+button -label "Circle Control"; button; button;
+setParent ..;
+
+string $mainCol = `columnLayout -parent $child1 -adjustableColumn 1`;
+
+    //creating first row for duplicate fields
+    string $dupRowLayout = `rowLayout -parent $mainCol -numberOfColumns 2 -adjustableColumn 2`;
+    text -parent $dupRowLayout -label "Duplicate";
+    string $dupIntField = `intField -parent $dupRowLayout -minValue 1 -value 1`;
+    
+    //create second row for min range values
+    string $rangeRowLayout = `rowLayout -parent $mainCol -numberOfColumns 4`;
+    text -parent $rangeRowLayout -label "Minimum Range";
+    string $xRange = `floatField -parent $rangeRowLayout -value 0`;
+    string $yRange = `floatField -parent $rangeRowLayout -value 0`;
+    string $zRange = `floatField -parent $rangeRowLayout -value 0`;
+    
+    //create second row for max range values
+    string $rangeMaxRowLayout = `rowLayout -parent $mainCol -numberOfColumns 4`;
+    text -parent $rangeMaxRowLayout -label "Max Range";
+    string $xRangeMax = `floatField -parent $rangeMaxRowLayout -value 0`;
+    string $yRangeMax = `floatField -parent $rangeMaxRowLayout -value 0`;
+    string $zRangeMax = `floatField -parent $rangeMaxRowLayout -value 0`;
+    
+    
+    //creating button
+    string $button = `button -parent $mainCol -label "Generate" -command ("MoveObj (\"" +$dupIntField + "\", \"" +$xRange + "\", \"" +$yRange + "\", \"" +$zRange + "\", \"" +$xRangeMax + "\", \"" +$yRangeMax + "\", \"" +$zRangeMax + "\")")`;
+
+
+tabLayout -edit -tabLabel $child1 "Random Generator" -tabLabel $child2 "Two" $tabs; //creating first tab
+
+    showWindow $mainWindow;
+    
+}
+
+
+global proc string[] RandomGen(int $randomNum) {
+
+string $itemArray[];
+    
+
+for($i=0; $i<$randomNum; $i++){
+    string $temporary[] = `duplicate -rr`;
+    $itemArray[$i] = $temporary[0];
+   
+    }
+    
+    return $itemArray;
+}
+
+
+global proc MoveObj(string $dupeName, string $xName, string $yName, string $zName, string $xNameMax, string $yNameMax, string $zNameMax){
+   
+   int $dupes = `GetIntFieldValue($dupeName)`; //query duplicate value 
+   string $moving[] = RandomGen($dupes); //Duplicate UI set number of times
+    
+    for($item in $moving){
+        
+        //query values
+        
+        float $xVal = `GetFloatFieldValue($xName)`;
+        float $yVal = `GetFloatFieldValue($yName)`;
+        float $zVal = `GetFloatFieldValue($yName)`;
+    
+        float $xValMax = `GetFloatFieldValue($xNameMax)`;
+        float $yValMax = `GetFloatFieldValue($yNameMax)`;
+        float $zValMax = `GetFloatFieldValue($yNameMax)`;
+        
+        //move objects as defined in UI
+        move (rand ($xVal, $xValMax)) (rand ($yVal, $yValMax)) (rand ($zVal, $zValMax)) $item;
+    }  
+
+}
+
+global proc float GetFloatFieldValue(string $control){
+    float $value = `floatField -q -value $control`;
+    return $value;
+}
+
+global proc float GetIntFieldValue(string $control){
+    int $intvalue = `intField -q -value $control`;
+    return $intvalue;
+}
+RandomGeneratorUI();
+
+
+
+
+
+
