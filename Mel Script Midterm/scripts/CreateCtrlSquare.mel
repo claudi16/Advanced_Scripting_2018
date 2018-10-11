@@ -1,0 +1,29 @@
+source "ChangeCtrlColor";
+
+global proc CreateCtrlsSquare(int $color){
+    
+    string $sels[] = `ls -sl`;
+    
+    if(size ($sels) > 0){
+        for ($sel in $sels){
+            string $ctrls[] = `nurbsSquare -name ($sel + "_Ctrl")`;
+            select -hi;
+            select -d ($sel + "_Ctrl"); //isolating children 
+            string $children[] = `ls -sl`;
+            
+                for ($nurbs in $children){
+                  
+                   ColorControls($nurbs, $color); //changes color of each nurb in group
+                }
+                 
+            group -name ($sel + "_Ctrl_Grp");
+            matchTransform ($sel + "_Ctrl_Grp") $sel; //move controls to selected objects
+        
+        }
+      }else{
+          nurbsSquare -name ("Ctrl");
+          group -name ("Ctrl_Grp");
+          select -cl;
+      }
+    
+}

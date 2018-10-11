@@ -1,19 +1,19 @@
-global proc string[] RandomGen(int $randomNum) {
+global proc string[] petal(int $randomNum) {
 
-string $itemArray[];
+string $blossom[];
     
 
 for($i=0; $i<$randomNum; $i++){
-    string $temporary[] = `duplicate -rr`;
-    $itemArray[$i] = $temporary[0];
+    string $temporary[] = duplicate -rr;
+    $blossom[$i] = $temporary[0];
    
     }
     
-    return $itemArray;
+    return $blossom;
 }
 
-global proc movingObject(int $trandMin, int $trandMax, int $rotMin, int $rotMax, int$trandMinY){
-    string $moving[] = RandomGen(20); //Input number of dupes here!
+global proc movingPetals(int $trandMin, int $trandMax, int $rotMin, int $rotMax, int$trandMinY){
+    string $moving[] = petal(20); //Input number of dupes here!
     
     for($item in $moving){
         
@@ -29,4 +29,4 @@ global proc movingObject(int $trandMin, int $trandMax, int $rotMin, int $rotMax,
     }
 }
 
-movingObject(-10, 10, -40, 60, 0); //Input transform min/max, rotate min/max
+movingPetals(-10, 10, -40, 60, 0); //Input transform min/max, rotate min/max

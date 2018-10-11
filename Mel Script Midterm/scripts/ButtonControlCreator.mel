@@ -1,0 +1,28 @@
+window -width 150;
+columnLayout -adjustableColumn true;
+    button -label "Circle Control" -command "createCircleButton";
+    button -label "Square Control" -command "createSquareButton";
+    button -label "Flower Control" -command "createFlowerButton";
+showWindow;
+
+proc createCircleButton()
+{
+	source "CreateCtrls";
+	CreateCtrls(9); //Choose color
+}
+
+proc createSquareButton()
+{
+	source "CreateCtrlSquare";
+	CreateCtrlsSquare(9); //Choose color
+}
+
+proc createFlowerButton()
+{
+	source "CreateCtrlFlower";
+	CreateCtrlsFlower(9); //Change color
+}
+
+
+
+
