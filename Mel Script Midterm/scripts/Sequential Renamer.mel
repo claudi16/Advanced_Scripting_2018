@@ -31,6 +31,6 @@ global proc renameSelected(string $renameInput){
        rename $item $rearrange; //rename!
        }
 } 
-renameSelected("Hand_##_Jnt");
+//renameSelected("Hand_##_Jnt");
 
 //create loop that'll add more 0s with the more #s there are

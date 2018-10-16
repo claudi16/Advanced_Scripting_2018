@@ -1,21 +1,8 @@
 global proc RandomGeneratorUI()
 {
-    
-    string $mainWindow = "RandomPlacementWindow";
-       
-    if (`window -exists $mainWindow`){
-        deleteUI $mainWindow;
-    }
-    
-    $mainWindow = `window -title "Claudi's Toolbox" $mainWindow`;
+   
 
-    
-    
-string $tabs = `tabLayout -innerMarginWidth 5 -innerMarginHeight 5`;//setting tab size
-string $child2 = `rowColumnLayout -numberOfColumns 2`;//placing script in column
-setParent ..;
-     
-string $mainCol = `columnLayout -parent $child2 -adjustableColumn 1`;
+string $mainCol = `columnLayout -adjustableColumn 1`;
 
     //creating first row for duplicate fields
     string $dupRowLayout = `rowLayout -parent $mainCol -numberOfColumns 2 -adjustableColumn 2`;
@@ -40,10 +27,6 @@ string $mainCol = `columnLayout -parent $child2 -adjustableColumn 1`;
     //creating button
     string $button = `button -parent $mainCol -label "Generate" -command ("MoveObj (\"" +$dupIntField + "\", \"" +$xRange + "\", \"" +$yRange + "\", \"" +$zRange + "\", \"" +$xRangeMax + "\", \"" +$yRangeMax + "\", \"" +$zRangeMax + "\")")`;
 
-
-tabLayout -edit -tabLabel $child2 "tab2" $tabs; //creating first tab
-
-    showWindow $mainWindow;
     
 }
 

@@ -1,52 +1,38 @@
-global proc ButtonControlUI(){
-       
-        string $mainWindow = "RandomPlacementWindow";
+global proc RenamerUI()
+{
+ 
+   /* string $mainWindow = "RandomPlacementWindow";
        
     if (`window -exists $mainWindow`){
         deleteUI $mainWindow;
     }
     
-    $mainWindow = `window -title "Claudi's Toolbox" $mainWindow`;
+    $mainWindow = `window -title "Claudi's Toolbox" $mainWindow`;*/
 
+     
+    string $mainColumnText = `columnLayout -adjustableColumn 1`;
     
- string $mainCol = `columnLayout -parent $child1 -adjustableColumn 1`;
-
-    string $dupRowLayoutButton = `rowLayout -parent $mainCol -numberofColumns 2 -adjustableColumn2`;
-    text -parent $dupRowLayoutButton -label "Color";
-    string $dupIntFieldButton = `intField -parent $dupRowLayoutButton -minValue 0 -maxValue 32`;
-
-   // columnLayout -adjustableColumn true;
-    string $button = `button -parent $mainCol -label "Circle Control" -command ("createCircleButton (\"" +$dupIntFieldButton + "\")")`;
-    //button -label "Square Control" -command "createSquareButton";
-   // button -label "Flower Control" -command "createFlowerButton";
+    string $dupRowLayoutText = `rowLayout -parent $mainColumnText -numberOfColumns 2 -adjustableColumn 2`;
+    text -parent $dupRowLayoutText -label "Name";
+    string $textFieldButton = `textField -parent $dupRowLayoutText -placeholderText "Hand_##_Jnt"`; 
+    
+    
+    string $renameButton = `button -parent $mainColumnText -label "Renamer" -command ("renamer (\"" + $textFieldButton + "\")")`;
+ 
+ //showWindow $mainWindow;  
 }
 
-proc createCircleButton(string $colorNum)
-{
-	source "CreateCtrls";
-	int $dupes = `GetIntFieldValue($colorNum)`;
-	CreateCtrls($dupes); //Choose color
+
+proc renamer(string $insertText){
+    string $textName = `GetTextFieldValue($insertText)`;
+    source "Sequential Renamer";
+    renameSelected($textName);
+
 }
 
-proc createSquareButton(string $colorNum)
-{
-	source "CreateCtrlSquare";
-	int $dupes = `GetIntFieldValue($colorNum)`;
-	CreateCtrlsSquare($dupes); //Choose color
+proc string GetTextFieldValue(string $control){
+    string $textvalue = `textField -q -text $control`;
+    return $textvalue;
 }
 
-proc createFlowerButton(string $colorNum)
-{
-	source "CreateCtrlFlower";
-	int $dupes = `GetIntFieldValue($colorNum)`;
-	CreateCtrlsFlower($dupes); //Change color
-}
-
-global proc float GetIntFieldValue(string $control){
-    int $intvalue = `intField -q -value $control`;
-    return $intvalue;
-}
-
-ButtonControlUI();
-
-
+RenamerUI();
