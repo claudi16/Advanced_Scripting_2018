@@ -1,2 +1,30 @@
+global proc Toolbox()
+{
+    
+    string $mainWindow = "RandomPlacementWindow";
+       
+    if (`window -exists $mainWindow`){
+        deleteUI $mainWindow;
+    }
+    
+    $mainWindow = `window -title "Claudi's Toolbox" $mainWindow`;
 
     
+    
+string $tabs = `tabLayout -innerMarginWidth 5 -innerMarginHeight 5`;//setting tab size
+
+string $child1 = `rowColumnLayout -numberOfColumns 2`;//placing script in column
+source "Random Generator Window";
+setParent ..;
+     
+string $child2 = `rowColumnLayout -numberOfColumns 2`;
+source "Button_Ctrl_Creator_Window";
+setParent ..;
+
+
+tabLayout -edit -tabLabel $child1 "Random Generator" -tabLabel $child2 "Control Creator" $tabs; //creating tabs
+
+    showWindow $mainWindow;
+    
+}
+Toolbox();
