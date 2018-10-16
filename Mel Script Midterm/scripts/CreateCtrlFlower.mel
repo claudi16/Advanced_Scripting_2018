@@ -21,13 +21,14 @@ global proc CreateCtrlsFlower(int $color){
         
         }
       }else{
-          string $flowers[] = `circle -name ("Ctrl")`;
+          string $flowers[] = `circle`;
            for ($nurbs in $flowers){ 
                 select -add $nurbs.ep[0] ;
                 select -add $nurbs.ep[2] ;
                 select -add $nurbs.ep[6] ;
                 select -add $nurbs.ep[4] ;
             scale -r -p 0cm 0cm 0cm -0.00268346 -0.00268346 -0.00268346 ;
+            ColorControls($nurbs, $color);
             }
           group -name ("Ctrl_Grp");
           scale -r 220000 220000 220000;

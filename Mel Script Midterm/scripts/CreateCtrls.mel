@@ -16,9 +16,14 @@ global proc CreateCtrls(int $color){
         }
       }else{
           
-          circle -name ("Ctrl");
+          
+          string $ctrlArray[] = `circle`;
+          string $circle = $ctrlArray[0];
+          ColorControls($circle, $color);
           group -name ("Ctrl_Grp");
+              
           select -cl;
+                     
       }
     
 }

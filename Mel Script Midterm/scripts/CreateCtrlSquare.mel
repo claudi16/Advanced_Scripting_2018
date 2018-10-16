@@ -21,7 +21,16 @@ global proc CreateCtrlsSquare(int $color){
         
         }
       }else{
-          nurbsSquare -name ("Ctrl");
+          string $squareArray[] = `nurbsSquare`;
+          string $square = $squareArray[0];
+          select -hi;
+          select -d $square; //isolating children 
+          string $children[] = `ls -sl`;
+            
+                for ($nurbs in $children){
+                   ColorControls($nurbs, $color); //changes color of each nurb in group
+                }
+          
           group -name ("Ctrl_Grp");
           select -cl;
       }

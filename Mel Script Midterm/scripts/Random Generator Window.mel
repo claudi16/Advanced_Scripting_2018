@@ -7,9 +7,20 @@ global proc RandomGeneratorUI()
         deleteUI $mainWindow;
     }
     
-    $mainWindow = `window -title "Random Placement Generator" $mainWindow`;
-    string $mainCol = `columnLayout -parent $mainWindow -adjustableColumn 1`;
+    $mainWindow = `window -title "Claudi's Toolbox" $mainWindow`;
+
     
+    
+string $tabs = `tabLayout -innerMarginWidth 5 -innerMarginHeight 5`;//setting tab size
+string $child1 = `rowColumnLayout -numberOfColumns 2`;//placing script in column
+setParent ..;
+     
+string $child2 = `rowColumnLayout -numberOfColumns 2`;
+source "Button_Ctrl_Creator_Window";
+setParent ..;
+
+string $mainCol = `columnLayout -parent $child1 -adjustableColumn 1`;
+
     //creating first row for duplicate fields
     string $dupRowLayout = `rowLayout -parent $mainCol -numberOfColumns 2 -adjustableColumn 2`;
     text -parent $dupRowLayout -label "Duplicate";
@@ -32,7 +43,10 @@ global proc RandomGeneratorUI()
     
     //creating button
     string $button = `button -parent $mainCol -label "Generate" -command ("MoveObj (\"" +$dupIntField + "\", \"" +$xRange + "\", \"" +$yRange + "\", \"" +$zRange + "\", \"" +$xRangeMax + "\", \"" +$yRangeMax + "\", \"" +$zRangeMax + "\")")`;
-    
+
+
+tabLayout -edit -tabLabel $child1 "Random Generator" -tabLabel $child2 "Control Creator" $tabs; //creating first tab
+
     showWindow $mainWindow;
     
 }

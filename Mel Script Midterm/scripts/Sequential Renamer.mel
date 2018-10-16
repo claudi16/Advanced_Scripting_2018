@@ -4,24 +4,33 @@ global proc renameSelected(string $renameInput){
    
    string $new[]; //new array to hold tokenized 
    tokenize $renameInput "#" $new; //tokenizing naming template
-   int $number = 0; //counter
+   int $number = 1; //counter
    
    int $hashNums = size($renameInput) - (size($new[0]) + size($new[1]) ); //Finding the number of # in a string
     
    for ($item in $selectedObj){
+
+      // string $numToStr = $number;//Converting int to string
+       string $paddedNumber;
+       int $selPadCap;
        
-       $number++; //counting
-       string $numToStr = $number;//Converting int to string
-       string $rearrange; //Creating new string to hold rename
-     
+       for ($i = 0; $i <= $number; $i+= 10){ //checks until more than 10 selections are made
+           $selPadCap++; 
+       }
        
-        if ($number < 10){ //Number padding
-           $rearrange = $new[0] + $numToStr + $new[1];  
-           } else{
-                $rearrange = $new[0] + $numToStr + $new[1]; 
-           }
+        int $padSize = $hashNums - $selPadCap; //number of #s - selections under 10 
+
+        for($i = 0; $i < $padSize; $i++){
+            $paddedNumber += "0";
+        }
+
+        $paddedNumber += $number;
+        $number++; //counting
+        
+       string $rearrange = $new[0] + $paddedNumber + $new[1];
        rename $item $rearrange; //rename!
        }
 } 
 renameSelected("Hand_##_Jnt");
 
+//create loop that'll add more 0s with the more #s there are
