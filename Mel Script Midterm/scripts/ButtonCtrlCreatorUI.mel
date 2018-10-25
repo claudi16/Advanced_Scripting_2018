@@ -1,0 +1,42 @@
+global proc ButtonCtrlCreatorUI(){
+
+    
+    string $mainColumn = `columnLayout -adjustableColumn 1`;
+    
+    string $dupRowLayoutButton = `rowLayout -parent $mainColumn -numberOfColumns 2 -adjustableColumn 2`;
+    text -parent $dupRowLayoutButton -label "Color";
+    string $dupIntFieldButton = `intField -parent $dupRowLayoutButton -minValue 0 -maxValue 32`;
+    
+    
+    string $CircleButton = `button -parent $mainColumn -label "Circle Control" -command ("createCircle (\"" + $dupIntFieldButton + "\")")`;
+    string $SquareButton = `button -parent $mainColumn -label "Square Control" -command ("createSquare (\"" + $dupIntFieldButton + "\")")`;
+    string $FlowerButton = `button -parent $mainColumn -label "Flower Control" -command ("createFlower (\"" + $dupIntFieldButton + "\")")`;
+
+}
+
+global proc createCircle(string $colorNum){
+    int $col = `GetIntFieldValue($colorNum)`;
+    source "CreateCtrls";
+    CreateCtrls($col);
+
+}
+
+global proc createSquare(string $colorNum){
+    int $col = `GetIntFieldValue($colorNum)`;
+    source "CreateCtrlSquare";
+    CreateCtrlsSquare($col);
+
+}
+
+global proc createFlower(string $colorNum){
+    int $col = `GetIntFieldValue($colorNum)`;
+    source "CreateCtrlFlower";
+    CreateCtrlsFlower($col);
+}
+
+proc float GetIntFieldValue(string $control){
+    int $intvalue = `intField -q -value $control`;
+    return $intvalue;
+}
+
+ButtonCtrlCreatorUI();

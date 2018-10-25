@@ -1,0 +1,28 @@
+global proc SequentialRenamerUI()
+{
+     
+    string $mainColumnText = `columnLayout -adjustableColumn 1`;
+    
+    string $dupRowLayoutText = `rowLayout -parent $mainColumnText -numberOfColumns 2 -adjustableColumn 2`;
+    text -parent $dupRowLayoutText -label "Name";
+    string $textFieldButton = `textField -parent $dupRowLayoutText -placeholderText "Hand_##_Jnt"`; 
+    
+    
+    string $renameButton = `button -parent $mainColumnText -label "Rename" -command ("renamer (\"" + $textFieldButton + "\")")`;
+  
+}
+
+
+global proc renamer(string $insertText){
+    string $textName = `GetTextFieldValue($insertText)`;
+    source "Sequential Renamer";
+    renameSelected($textName);
+
+}
+
+global proc string GetTextFieldValue(string $control){
+    string $textvalue = `textField -q -text $control`;
+    return $textvalue;
+}
+
+SequentialRenamerUI();
