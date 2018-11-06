@@ -17,10 +17,12 @@ def RenameSelected(renameInput):
             i+= 10
             selPadCap +=1
         
-        padSize = hashNums - selPadCap
+        padSize = (hashNums - selPadCap)
+        print (padSize)
         
         for i in range(padSize):
             paddedNumber += "0"
+            i+=1
             
         #paddedNumber.zfill(number)
         paddedNumber += str(number)
@@ -28,10 +30,10 @@ def RenameSelected(renameInput):
     
         rearrange = (new[0] + paddedNumber + new[2])
         cmds.rename(sel, rearrange)
-        print(number)
+     #   print(number)
          
-    print (paddedNumber)
+   # print (paddedNumber)
    
     
-RenameSelected ('hello_###_work')
+RenameSelected ('hello_##_work')
 
