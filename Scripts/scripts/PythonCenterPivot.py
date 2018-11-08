@@ -16,9 +16,9 @@ def CreateLoc(option):
         cmds.xform(loc, translation=pivot, worldSpace=True)
     
     elif option is 2:
-    for sel in sels:
-        pivot = cmds.xform(sel, q=True, rp=True)
-        loc = cmds.spaceLocator()[0[
-        cmds.xform(loc, translation=pivot, worldSpace=True)
+        for sel in sels:
+            pivot = cmds.xform(sel, q=True, rp=True)
+            loc = cmds.spaceLocator()[0]
+            cmds.xform(loc, translation=pivot, worldSpace=True)
         
 CreateLoc(1)
