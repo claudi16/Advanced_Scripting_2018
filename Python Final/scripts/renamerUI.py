@@ -1,5 +1,6 @@
 import maya.cmds as cmds
 
+#import sequential_renamer
 
 class SequentialRenamerUI():
     def __init__(self):
@@ -20,32 +21,14 @@ class SequentialRenamerUI():
     def delete(self):
         if cmds.window (self.mWin, exists = True):
             cmds.deleteUI (self.mWin)
-#renamer            
-    def renamer(self, text_field):
-
-        def sequential_renamer(renameInput):
-            sels = cmds.ls(sl=True)
             
-            new = []
-            new = renameInput.split("#")
-            number = 0
-            hashNums = len(renameInput) - (len(new[0]) + len(new[-1])) 
+#pass argument from renamer script           
+    def renamer(self, text_input):
+        text_input = cmds.textField(text_input, q=True, text = True)
+        import sequential_renamer
+        reload(sequential_renamer)
+        text_input = sequential_renamer.sequential_renamer(text_input)
         
-            for sel in sels:
-                          
-                paddedNumber = ''
-                number += 1
-                
-                for i in range(hashNums):
-                    paddedNumber += '0'
-                    i+=1
-                paddedNumber += str(number)
-                
-                rearrange = (new[0] + paddedNumber + new[-1])
-        
-                cmds.rename(sel, rearrange)
-                
-        sequential_renamer('hand_##_lsf')
         
         
 renameTool = SequentialRenamerUI()

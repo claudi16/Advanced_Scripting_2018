@@ -22,4 +22,3 @@ def sequential_renamer(renameInput):
 
         cmds.rename(sel, rearrange)
         
-sequential_renamer('hi_##_dkf')
