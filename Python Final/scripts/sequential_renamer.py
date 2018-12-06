@@ -1,6 +1,6 @@
 import maya.cmds as cmds
 
-def RenameSelected(renameInput):
+def sequential_renamer(renameInput):
     sels = cmds.ls(sl=True)
     
     new = []
@@ -21,8 +21,5 @@ def RenameSelected(renameInput):
         rearrange = (new[0] + paddedNumber + new[-1])
 
         cmds.rename(sel, rearrange)
-        print(new)
-
-RenameSelected('Name_#_Type')
-    
-    
+        
+sequential_renamer('hi_##_dkf')
