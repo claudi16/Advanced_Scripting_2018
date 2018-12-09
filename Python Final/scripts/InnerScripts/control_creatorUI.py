@@ -36,10 +36,14 @@ class ControlCreatorUI():
             circleCtrlTool.create_circle(colInput)
 
         elif option is 2:
-            print('hello')
+            colInput = cmds.intField(colInput, q=True, value = 0)
+            squareCtrlTool = CreateSquare()
+            squareCtrlTool.create_square(colInput)
         
         elif option is 3:
-            print('3')
+            colInput = cmds.intField(colInput, q=True, value = 0)
+            flowerCtrlTool = CreateFlower()
+            flowerCtrlTool.create_flower(colInput)
 
         
 ctrlTool = ControlCreatorUI()
