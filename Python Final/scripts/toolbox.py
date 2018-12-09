@@ -10,6 +10,7 @@ class Toolbox():
         self.mWin = cmds.window(self.mWin, title = 'cdToolbox')
         self.mCol = cmds.columnLayout(parent=self.mWin, adjustableColumn=True)
         cmds.button(parent=self.mCol, label = 'Renamer', command=lambda x: self.renameWin())
+        cmds.button(parent=self.mCol, label = 'Random Generator', command=lambda x: self.randomGenWin())
         
         cmds.showWindow(self.mWin)
         
@@ -20,6 +21,10 @@ class Toolbox():
     def renameWin(self):
         renameTool = SequentialRenamerUI()
         renameTool.create()
+        
+    def randomGenWin(self):
+        randomTool = RandomGeneratorUI()
+        randomTool.create()
 
 toolboxTool = Toolbox()
 toolboxTool.create()
