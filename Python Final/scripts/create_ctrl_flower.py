@@ -11,18 +11,18 @@ class CreateFlower():
 
         if len(self.sels) > 0:
            for self.sel in self.sels:
-               self.ctrls = cmds.circle(name = self.sel + 'Flower_Ctrl')
+               self.ctrls = cmds.circle(name = self.sel + '_Ctrl')
                cmds.select(clear = True)
-               cmds.select(self.sel + 'Flower_Ctrl' + '.ep[0]', self.sel + 'Flower_Ctrl' + '.ep[2]', 
-                            self.sel + 'Flower_Ctrl' + '.ep[4]', self.sel + 'Flower_Ctrl' +'.ep[6]', tgl = True )
+               cmds.select(self.sel + '_Ctrl' + '.ep[0]', self.sel + '_Ctrl' + '.ep[2]', 
+                            self.sel + '_Ctrl' + '.ep[4]', self.sel + '_Ctrl' +'.ep[6]', tgl = True )
                cmds.scale(.003, .003, .003, r=True)
-               cmds.group(em = True, n = self.sel + 'Flower_Ctrl_Grp')
+               cmds.group(em = True, n = self.sel + '_Ctrl_Grp')
                self.ctrl = self.ctrls[0]
-               cmds.parent(self.ctrl, (self.sel + 'Flower_Ctrl_Grp'))
+               cmds.parent(self.ctrl, (self.sel + '_Ctrl_Grp'))
                import color_changer #import color changing script
                reload (color_changer)
                color_changer.color_Controls(self.ctrl, colorpick)
-               cmds.matchTransform(self.sel + 'Flower_Ctrl_Grp', self.sel)
+               cmds.matchTransform(self.sel + '_Ctrl_Grp', self.sel)
 
         else:
             self.ctrlArray = cmds.circle()
@@ -34,8 +34,8 @@ class CreateFlower():
                 import color_changer #import color changing script
                 reload (color_changer)
                 color_changer.color_Controls(nurbs, colorpick)
-                cmds.group(em = True, n = 'Flower_Ctrl_Grp')
-                cmds.parent(nurbs, 'Flower_Ctrl_Grp')
+                cmds.group(em = True, n = 'Ctrl_Grp')
+                cmds.parent(nurbs, 'Ctrl_Grp')
                 cmds.select(cl=True)
             
 #circleCtrlTool = CreateFlower()

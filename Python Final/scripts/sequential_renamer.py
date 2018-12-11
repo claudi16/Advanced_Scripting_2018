@@ -21,4 +21,3 @@ def sequential_renamer(renameInput):
         rearrange = (new[0] + paddedNumber + new[-1])
 
         cmds.rename(sel, rearrange)
-        

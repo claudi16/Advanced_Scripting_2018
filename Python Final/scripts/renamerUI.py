@@ -9,7 +9,7 @@ class SequentialRenamerUI():
 #create textfield & button        
     def create(self):
         self.delete()
-        self.mwin = cmds.window(self.mWin, title = 'Sequential Renammer')
+        self.mWin = cmds.window(self.mWin, title = 'Sequential Renammer')
         mCol = cmds.columnLayout(parent=self.mWin, adjustableColumn = True)
         self.nameField = cmds.textField(placeholderText = 'Hand_##_Jnt')
         

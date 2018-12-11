@@ -46,5 +46,5 @@ class ControlCreatorUI():
             flowerCtrlTool.create_flower(colInput)
 
         
-#ctrlTool = ControlCreatorUI()
-#ctrlTool.create()
+ctrlTool = ControlCreatorUI()
+ctrlTool.create()

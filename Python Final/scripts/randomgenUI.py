@@ -9,7 +9,7 @@ class RandomGeneratorUI():
         self.mwin = cmds.window(self.mWin, title = 'Random Generator')
         mCol = cmds.columnLayout(parent=self.mWin, adjustableColumn = True)
 
-#create 1st row for duplicate fields
+#create 1st row for dupelicate fields
         dupRowLayout = cmds.columnLayout(parent=self.mWin, adjustableColumn = True)
         cmds.text(parent = dupRowLayout, label='Duplicate', align='left')
         self.dupIntField = cmds.intField (min = 1, value = 1)
@@ -17,15 +17,15 @@ class RandomGeneratorUI():
 #create 2nd row for min range values
         rangeRowLayout = cmds.rowLayout(parent=self.mWin, numberOfColumns = 4)
         cmds.text(parent = rangeRowLayout, label = "Minimum Transform/Rotate", align = 'left')
-        self.transformRange = cmds.floatField (parent = rangeRowLayout, value = -1)
-        self.rotateRange = cmds.floatField (parent = rangeRowLayout, value = -1)
+        self.transformRange = cmds.floatField (parent = rangeRowLayout, value = 0)
+        self.rotateRange = cmds.floatField (parent = rangeRowLayout, value = 0)
 
 
 #create 3rd row for max range values
         rangeMaxRowLayout = cmds.rowLayout(parent=self.mWin, numberOfColumns = 4)
         cmds.text(parent = rangeMaxRowLayout, label = "Maximum Transform/Rotate", align = 'left')
-        self.transformRangeMax = cmds.floatField (parent = rangeMaxRowLayout, value = 1)
-        self.rotateRangeMax = cmds.floatField (parent = rangeMaxRowLayout, value = 1)
+        self.transformRangeMax = cmds.floatField (parent = rangeMaxRowLayout, value = 0)
+        self.rotateRangeMax = cmds.floatField (parent = rangeMaxRowLayout, value = 0)
 
 #create button
         cmds.button(parent = mCol, label = 'Generate', c=lambda x: self.moveObj(self.dupIntField, self.transformRange, self.transformRangeMax, self.rotateRange, self.rotateRangeMax))

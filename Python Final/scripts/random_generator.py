@@ -3,15 +3,16 @@ import random
 
 
 def objects (randomNum):
-    returnArray = []
+    blossom = []
     temp = []
     i=0
     for i in range(randomNum):
         temp = [cmds.duplicate()]
-        returnArray.append(temp[0])
+        blossom.append(temp[0])
+        print blossom
 
         
-    return (returnArray)  
+    return (blossom)  
     
 def movingObjects (dupes, trandMin, trandMax, rotMin, rotMax):
     moving = objects(dupes)
@@ -29,5 +30,5 @@ def movingObjects (dupes, trandMin, trandMax, rotMin, rotMax):
         cmds.move (randX, randY, randZ, item, ws=True)
         cmds.rotate(randRotateX, randRotateY, randRotateZ, item)
         
-#movingObjects(1, 0, 1, 0, 1)
+#movingObjects(4, -10, 10, -40, 60)
 

@@ -11,20 +11,19 @@ class CreateSquare():
 
         if len(self.sels) > 0:
            for self.sel in self.sels:
-               cmds.nurbsSquare(name = self.sel + 'Square_Ctrl')
+               cmds.nurbsSquare(name = self.sel + '_Ctrl')
                cmds.select(hi=True)
-               cmds.select(self.sel + 'Square_Ctrl', d=True)
-               cmds.
-               children = cmds.nodeType(cmds.ls(sl = True)
-
+               cmds.select(self.sel + '_Ctrl', d=True)
+               children = cmds.ls(sl = True)
+               
                for nurbs in children:
                    import color_changer #import color changing script
                    reload (color_changer)
                    color_changer.color_Controls(nurbs, colorpick)
 
-               cmds.group(em = True, n = self.sel + 'Square_Ctrl_Grp')    
-               cmds.parent(self.ctrl, (self.sel + 'Square_Ctrl_Grp'))
-               cmds.matchTransform(self.sel + 'Square_Ctrl_Grp', self.sel)
+               cmds.group(em = True, n = self.sel + '_Ctrl_Grp')    
+               cmds.parent(self.ctrl, (self.sel + '_Ctrl_Grp'))
+               cmds.matchTransform(self.sel + '_Ctrl_Grp', self.sel)
 
 
         else:
@@ -37,8 +36,8 @@ class CreateSquare():
                 import color_changer #import color changing script
                 reload (color_changer)
                 color_changer.color_Controls(nurbs, colorpick)
-            cmds.group(em = True, n = 'Square_Ctrl_Grp')
-            cmds.parent(self.circles, 'Square_Ctrl_Grp')
+            cmds.group(em = True, n = 'Ctrl_Grp')
+            cmds.parent(self.circles, 'Ctrl_Grp')
             cmds.select(cl=True)
             
 #circleCtrlTool = CreateSquare()
